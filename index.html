@@ -210,6 +210,33 @@
     showContactModal: false,
     sliderPos: 50,
     activeAccordion: 1,
+    currentResultIndex: 0,
+    results: [
+        {
+            id: '#402',
+            title: 'Elite Veneer Restoration',
+            desc: 'An architectural approach to cosmetic dentistry. This case utilized minimally invasive porcelain veneers to correct alignment and restore natural luminosity.',
+            before: 'Images/results-before.png',
+            after: 'Images/results-after.png',
+            features: ['Bespoke Shade Matching', 'Gingival Contouring']
+        },
+        {
+            id: '#512',
+            title: 'Implant Reconstruction',
+            desc: 'Surgical precision combined with aesthetic mastery. This case involved the strategic placement of medical-grade implants for lifelong restoration.',
+            before: 'Images/results-before-2.png',
+            after: 'Images/results-after-2.png',
+            features: ['High-Density Titanium Implants', 'Perfect Gum Integration']
+        },
+        {
+            id: '#608',
+            title: 'Full Mouth Restoration',
+            desc: 'A comprehensive transformative journey. This full-mouth protocol restored the structural integrity and aesthetic brilliance of the smile.',
+            before: 'Images/results-before-3.png',
+            after: 'Images/results-after-3.png',
+            features: ['Total Arch Alignment', 'Medical Grade Whitening']
+        }
+    ],
     countries: [
         { code: '+91', flag: '🇮🇳', name: 'IN', len: 10 },
         { code: '+1', flag: '🇺🇸', name: 'US', len: 10 },
@@ -302,7 +329,7 @@
                     class="hidden md:inline text-stone-500 font-medium text-sm hover:text-brand transition-colors cursor-pointer">(714)
                     555-0123</a>
                 <button @click="showContactModal = true"
-                    class="shimmer bg-brand text-white px-8 h-[60px] inline-flex items-center justify-center rounded-none font-medium text-xs uppercase tracking-widest transition-all duration-300 hover:bg-brand-dark transform hover:-translate-y-0.5">
+                    class="hidden md:inline-flex shimmer bg-brand text-white px-8 h-[60px] items-center justify-center rounded-none font-medium text-xs uppercase tracking-widest transition-all duration-300 hover:bg-brand-dark transform hover:-translate-y-0.5">
                     Book Free Consult
                 </button>
             </div>
@@ -310,29 +337,76 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="pt-24 pb-20 md:pt-32 md:pb-32 px-6 overflow-hidden bg-surface">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div class="relative z-10 max-w-2xl">
+    <section class="pt-24 pb-12 md:pt-32 md:pb-32 px-6 overflow-hidden bg-surface">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            
+            <div class="relative flex justify-center lg:justify-end opacity-0 animate-fade-in-up animate-delay-400 order-1 lg:order-2">
+                <!-- Wrapper for precise badge alignment -->
+                <div class="relative">
+                    <!-- Animated Offer Badge -->
+                    <div class="absolute -top-[100px] -left-[10px] sm:-left-8 md:top-8 md:-left-8 z-20">
+                        <div class="animated-border-container rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300">
+                            <div class="animated-border-content rounded-[10px] px-6 py-5 text-center min-w-[160px]">
+                                <span class="bg-brand text-white text-[10px] font-black uppercase tracking-[0.3em] px-3 py-1.5 rounded-none mb-3 block shadow-lg shadow-brand/30 animate-pulse">
+                                    Special Offer
+                                </span>
+                                <div class="font-headline text-3xl font-black text-stone-850 leading-none">20%</div>
+                                <div class="text-[10px] font-bold uppercase tracking-widest text-brand mt-1">Off Implants</div>
+                                <div class="w-8 h-0.5 bg-brand/20 mx-auto mt-3"></div>
+                                <div class="text-[9px] text-stone-400 mt-2 font-medium">Limited Time Only</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image Container -->
+                    <div
+                        class="relative w-[340px] xs:w-[400px] sm:w-[500px] md:w-[550px] aspect-[4/5] rounded-3xl overflow-hidden shadow-editorial bg-stone-100 group">
+                        <img alt="Modern dental care confident patient"
+                            class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                            src="Images/hero-patient.webp" />
+                    </div>
+
+                    <!-- Floating Review Badge -->
+                    <div
+                        class="absolute -bottom-6 -right-4 md:bottom-[26px] md:-right-8 bg-white p-5 rounded-2xl shadow-editorial border border-stone-100 max-w-[220px] md:max-w-[240px] transform transition-transform hover:-translate-y-2 duration-300 z-20">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex text-amber-400">
+                                <span class="material-symbols-outlined filled text-lg">star</span>
+                                <span class="material-symbols-outlined filled text-lg">star</span>
+                                <span class="material-symbols-outlined filled text-lg">star</span>
+                                <span class="material-symbols-outlined filled text-lg">star</span>
+                                <span class="material-symbols-outlined filled text-lg">star</span>
+                            </div>
+                            <img src="Images/google-review.webp" alt="Google" class="h-10 w-auto">
+                        </div>
+                        <p class="font-bold text-sm text-stone-850 mb-1">5.0 Google Rating</p>
+                        <p class="text-xs text-stone-500 leading-relaxed font-light">Trusted by over 500+ patients in Orange
+                            County.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative z-10 max-w-2xl order-2 lg:order-1">
                 <span
                     class="inline-flex items-center gap-2 text-brand font-semibold uppercase tracking-[0.15em] text-xs mb-6 opacity-0 animate-fade-in-up">
                     <span class="w-8 h-[1px] bg-brand"></span> Top-Rated Care in Anaheim
                 </span>
                 <h1
-                    class="font-headline text-5xl md:text-6xl lg:text-7xl font-bold text-stone-850 leading-[1.1] mb-6 tracking-tight opacity-0 animate-fade-in-up animate-delay-100">
+                    class="font-headline text-4xl md:text-6xl lg:text-7xl font-bold text-stone-850 leading-[1.1] mb-6 tracking-tight opacity-0 animate-fade-in-up animate-delay-100">
                     Transform your <span class="text-brand italic font-normal">smile</span> with absolute precision.
                 </h1>
                 <p
-                    class="text-lg md:text-xl text-stone-500 mb-10 leading-relaxed font-light opacity-0 animate-fade-in-up animate-delay-200">
+                    class="text-base md:text-xl text-stone-500 mb-10 leading-relaxed font-light opacity-0 animate-fade-in-up animate-delay-200">
                     Experience compassionate dental excellence tailored to your long-term health. We merge editorial
                     aesthetics with elite medical expertise.
                 </p>
                 <div class="flex flex-col sm:flex-row items-start gap-4 opacity-0 animate-fade-in-up animate-delay-300">
-                    <div class="flex flex-col gap-4">
+                    <div class="flex flex-col gap-4 w-full sm:w-auto">
                         <button @click="showContactModal = true"
-                            class="shimmer bg-brand text-white px-8 h-[60px] inline-flex items-center justify-center rounded-none font-medium text-sm uppercase tracking-widest hover:bg-brand-dark transition-all duration-300 transform hover:-translate-y-1">
+                            class="shimmer bg-brand text-white px-8 h-[60px] inline-flex items-center justify-center rounded-none font-medium text-sm uppercase tracking-widest hover:bg-brand-dark transition-all duration-300 transform hover:-translate-y-1 w-full sm:w-auto">
                             Get Free Scan
                         </button>
-                        <div class="flex items-center gap-1.5 px-1">
+                        <div class="flex items-center gap-1.5 px-1 justify-center sm:justify-start">
                             <div class="flex text-amber-500">
                                 <span class="material-symbols-outlined filled text-xs">star</span>
                                 <span class="material-symbols-outlined filled text-xs">star</span>
@@ -343,53 +417,13 @@
                             <span class="text-[10px] text-stone-400 uppercase tracking-widest font-bold ml-1">5.0 Verified Clinical Score</span>
                         </div>
                     </div>
-                    <button @click="showResultsModal = true"
-                        class="bg-transparent border-2 border-brand text-brand px-8 h-[60px] inline-flex items-center justify-center rounded-none font-medium text-sm uppercase tracking-widest hover:bg-brand hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                    <button @click="currentResultIndex = 0; sliderPos = 50; showResultsModal = true"
+                        class="bg-transparent border-2 border-brand text-brand px-8 h-[60px] inline-flex items-center justify-center rounded-none font-medium text-sm uppercase tracking-widest hover:bg-brand hover:text-white transition-all duration-300 transform hover:-translate-y-1 w-full sm:w-auto">
                         See Results
                     </button>
                 </div>
             </div>
 
-            <div class="relative flex justify-center lg:justify-end opacity-0 animate-fade-in-up animate-delay-400">
-                <!-- Image Container -->
-                <div
-                    class="relative w-full max-w-[550px] aspect-[4/5] rounded-3xl overflow-hidden shadow-editorial bg-stone-100 group">
-                    <img alt="Modern dental care confident patient"
-                        class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                        src="Images/hero-patient.webp" />
-                </div>
-
-                <!-- Animated Offer Badge (Floating Outside) -->
-                <div class="absolute top-8 left-0 md:-left-8 z-20">
-                    <div class="animated-border-container rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300">
-                        <div class="animated-border-content rounded-[10px] px-6 py-5 text-center min-w-[160px]">
-                            <span class="bg-brand/10 text-brand text-[10px] font-bold uppercase tracking-[0.2em] px-2 py-1 rounded mb-2 block">Special Offer</span>
-                            <div class="font-headline text-3xl font-black text-stone-850 leading-none">20%</div>
-                            <div class="text-[10px] font-bold uppercase tracking-widest text-brand mt-1">Off Implants</div>
-                            <div class="w-8 h-0.5 bg-brand/20 mx-auto mt-3"></div>
-                            <div class="text-[9px] text-stone-400 mt-2 font-medium">Limited Time Only</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Floating Review Badge (Floating Outside) -->
-                <div
-                    class="absolute bottom-[26px] right-0 md:-right-8 bg-white p-5 rounded-2xl shadow-editorial border border-stone-100 max-w-[240px] transform transition-transform hover:-translate-y-2 duration-300 z-20">
-                    <div class="flex items-center justify-between mb-2">
-                        <div class="flex text-amber-400">
-                            <span class="material-symbols-outlined filled text-lg">star</span>
-                            <span class="material-symbols-outlined filled text-lg">star</span>
-                            <span class="material-symbols-outlined filled text-lg">star</span>
-                            <span class="material-symbols-outlined filled text-lg">star</span>
-                            <span class="material-symbols-outlined filled text-lg">star</span>
-                        </div>
-                        <img src="Images/google-review.webp" alt="Google" class="h-10 w-auto">
-                    </div>
-                    <p class="font-bold text-sm text-stone-850 mb-1">5.0 Google Rating</p>
-                    <p class="text-xs text-stone-500 leading-relaxed font-light">Trusted by over 500+ patients in Orange
-                        County.</p>
-                </div>
-            </div>
         </div>
     </section>
     <!-- Trust Stats Section -->
@@ -456,7 +490,7 @@
     </section>
 
     <!-- Patient Results Marquee -->
-    <section class="py-24 bg-[#0B0B0B] text-white overflow-hidden marquee-container" id="reviews">
+    <section class="py-12 md:py-24 bg-[#0B0B0B] text-white overflow-hidden marquee-container" id="reviews">
         <div class="max-w-7xl mx-auto px-6 mb-20 text-center">
             <span class="text-brand font-medium uppercase tracking-[0.15em] text-xs mb-4 block">Patient Experience</span>
             <h2 class="font-headline text-4xl md:text-5xl font-bold mb-6">Real Patients. <span class="italic text-brand font-normal">Genuine Smiles.</span></h2>
@@ -630,7 +664,7 @@
     </section>
 
     <!-- Insurance Section -->
-    <section class="py-24 px-6 bg-surface-muted border-y border-stone-200/50" id="insurance">
+    <section class="py-12 md:py-24 px-6 bg-surface-muted border-y border-stone-200/50" id="insurance">
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-col lg:flex-row items-center gap-16">
                 <div class="lg:w-1/2">
@@ -675,7 +709,7 @@
     </section>
 
     <!-- Why Choose Section -->
-    <section class="py-24 bg-surface-muted px-6 border-y border-stone-200/50">
+    <section class="py-12 md:py-24 bg-surface-muted px-6 border-y border-stone-200/50">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20">
                 <h2 class="font-headline text-4xl md:text-5xl font-bold mb-6 tracking-tight">The Modern Standard of
@@ -726,7 +760,7 @@
     </section>
 
     <!-- Doctor Spotlight -->
-    <section class="py-32 px-6 bg-surface" id="expertise">
+    <section class="py-16 md:py-32 px-6 bg-surface" id="expertise">
         <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-20 items-center">
             <div class="w-full lg:w-1/2 relative">
                 <div class="relative w-full aspect-square md:aspect-[3/4] max-w-lg mx-auto rounded-3xl overflow-hidden shadow-editorial">
@@ -763,7 +797,7 @@
     </section>
 
     <!-- Service Portfolio Section -->
-    <section class="py-32 px-6 bg-surface" id="services">
+    <section class="py-16 md:py-32 px-6 bg-surface" id="services">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20">
                 <span class="text-brand font-semibold uppercase tracking-[0.15em] text-xs mb-4 block">Clinical Results</span>
@@ -772,53 +806,72 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Service 1 -->
-                <div class="group cursor-pointer">
+                <div class="group">
                     <div class="aspect-[4/5] overflow-hidden rounded-2xl mb-6 shadow-editorial">
                         <img src="Images/portfolio-1.jpg" alt="Dental Implants" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                     </div>
-                    <h3 class="font-headline text-xl font-semibold text-stone-850">Dental Implants</h3>
-                    <p class="text-sm text-stone-500 font-light mt-2 uppercase tracking-widest">Advanced Reconstruction</p>
+                    <h3 class="font-headline text-xl font-semibold text-stone-850 mb-3">Dental Implants</h3>
+                    <p class="text-stone-500 text-sm font-light leading-relaxed min-h-[60px]">Restore your confidence with surgical-grade implants that look and feel completely natural. Our precision reconstruction ensures a lifelong, durable smile.</p>
+                    <button @click="showContactModal = true" class="text-brand text-xs font-bold uppercase tracking-widest hover:text-brand-dark transition-all mt-4 flex items-center gap-2 group/btn">
+                        Book Now <span class="material-symbols-outlined text-sm transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
+                    </button>
                 </div>
                 <!-- Service 2 -->
-                <div class="group cursor-pointer">
+                <div class="group">
                     <div class="aspect-[4/5] overflow-hidden rounded-2xl mb-6 shadow-editorial">
                         <img src="Images/portfolio-2.jpg" alt="Invisalign" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                     </div>
-                    <h3 class="font-headline text-xl font-semibold text-stone-850">Invisalign</h3>
-                    <p class="text-sm text-stone-500 font-light mt-2 uppercase tracking-widest">Clear Orthodontics</p>
+                    <h3 class="font-headline text-xl font-semibold text-stone-850 mb-3">Invisalign</h3>
+                    <p class="text-stone-500 text-sm font-light leading-relaxed min-h-[60px]">Straighten your teeth discreetly with our custom-fit clear aligners. Achieve a perfect alignment without the need for traditional metal braces.</p>
+                    <button @click="showContactModal = true" class="text-brand text-xs font-bold uppercase tracking-widest hover:text-brand-dark transition-all mt-4 flex items-center gap-2 group/btn">
+                        Book Now <span class="material-symbols-outlined text-sm transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
+                    </button>
                 </div>
                 <!-- Service 3 -->
-                <div class="group cursor-pointer">
+                <div class="group">
                     <div class="aspect-[4/5] overflow-hidden rounded-2xl mb-6 shadow-editorial">
                         <img src="Images/portfolio-3.jpg" alt="Full Mouth Reconstruction" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                     </div>
-                    <h3 class="font-headline text-xl font-semibold text-stone-850">Restorative Care</h3>
-                    <p class="text-sm text-stone-500 font-light mt-2 uppercase tracking-widest">Full Mouth Reconstruction</p>
+                    <h3 class="font-headline text-xl font-semibold text-stone-850 mb-3">Restorative Care</h3>
+                    <p class="text-stone-500 text-sm font-light leading-relaxed min-h-[60px]">Comprehensive full-mouth reconstruction designed to restore both function and aesthetics. We combine elite medical standards with artistic precision.</p>
+                    <button @click="showContactModal = true" class="text-brand text-xs font-bold uppercase tracking-widest hover:text-brand-dark transition-all mt-4 flex items-center gap-2 group/btn">
+                        Book Now <span class="material-symbols-outlined text-sm transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
+                    </button>
                 </div>
                 <!-- Service 4 -->
-                <div class="group cursor-pointer">
+                <div class="group">
                     <div class="aspect-[4/5] overflow-hidden rounded-2xl mb-6 shadow-editorial">
                         <img src="Images/portfolio-4.jpg" alt="Veneers" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                     </div>
-                    <h3 class="font-headline text-xl font-semibold text-stone-850">Porcelain Veneers</h3>
-                    <p class="text-sm text-stone-500 font-light mt-2 uppercase tracking-widest">Aesthetic Mastery</p>
+                    <h3 class="font-headline text-xl font-semibold text-stone-850 mb-3">Porcelain Veneers</h3>
+                    <p class="text-stone-500 text-sm font-light leading-relaxed min-h-[60px]">Achieve an editorial-ready smile with bespoke porcelain veneers. Tailored shade matching and gingival contouring for a truly natural finish.</p>
+                    <button @click="showContactModal = true" class="text-brand text-xs font-bold uppercase tracking-widest hover:text-brand-dark transition-all mt-4 flex items-center gap-2 group/btn">
+                        Book Now <span class="material-symbols-outlined text-sm transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
+                    </button>
                 </div>
                 <!-- Service 5 -->
-                <div class="group cursor-pointer">
+                <div class="group">
                     <div class="aspect-[4/5] overflow-hidden rounded-2xl mb-6 shadow-editorial">
                         <img src="Images/portfolio-6.jpg" alt="Oral Surgery" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                     </div>
-                    <h3 class="font-headline text-xl font-semibold text-stone-850">Oral Surgery</h3>
-                    <p class="text-sm text-stone-500 font-light mt-2 uppercase tracking-widest">Surgical Precision</p>
+                    <h3 class="font-headline text-xl font-semibold text-stone-850 mb-3">Oral Surgery</h3>
+                    <p class="text-stone-500 text-sm font-light leading-relaxed min-h-[60px]">Expert surgical care focused on patient comfort and exacting medical standards. Minimally invasive techniques for faster recovery times.</p>
+                    <button @click="showContactModal = true" class="text-brand text-xs font-bold uppercase tracking-widest hover:text-brand-dark transition-all mt-4 flex items-center gap-2 group/btn">
+                        Book Now <span class="material-symbols-outlined text-sm transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
+                    </button>
                 </div>
                 <!-- Service 6 -->
-                <div class="group cursor-pointer">
+                <div class="group">
                     <div class="aspect-[4/5] overflow-hidden rounded-2xl mb-6 shadow-editorial">
                         <img src="Images/portfolio-5.png" alt="Emergency Care" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                     </div>
-                    <h3 class="font-headline text-xl font-semibold text-stone-850">Cosmetic Excellence</h3>
-                    <p class="text-sm text-stone-500 font-light mt-2 uppercase tracking-widest">Bespoke Smiles</p>
+                    <h3 class="font-headline text-xl font-semibold text-stone-850 mb-3">Cosmetic Excellence</h3>
+                    <p class="text-stone-500 text-sm font-light leading-relaxed min-h-[60px]">Elevate your aesthetic with advanced whitening and contouring treatments. We focus on the fine details that make your smile uniquely beautiful.</p>
+                    <button @click="showContactModal = true" class="text-brand text-xs font-bold uppercase tracking-widest hover:text-brand-dark transition-all mt-4 flex items-center gap-2 group/btn">
+                        Book Now <span class="material-symbols-outlined text-sm transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
+                    </button>
                 </div>
+
             </div>
             <div class="flex justify-center mt-24">
                 <button @click="showContactModal = true" class="shimmer bg-brand text-white px-12 h-14 inline-flex items-center justify-center font-bold text-xs uppercase tracking-widest hover:bg-brand-dark transition-all duration-300 transform hover:-translate-y-1">
@@ -830,7 +883,7 @@
 
 
     <!-- Form and Map Section -->
-    <section class="py-32 px-6 bg-surface" id="contact">
+    <section class="py-16 md:py-32 px-6 bg-surface" id="contact">
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
                 <div class="bg-white p-10 md:p-12 rounded-none shadow-editorial border border-stone-100">
@@ -947,8 +1000,58 @@
         </div>
     </section>
 
+    <!-- Clinical Results Gallery -->
+    <section class="py-16 md:py-32 px-6 bg-surface-muted border-y border-stone-100" id="gallery">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <span class="text-brand font-semibold uppercase tracking-[0.15em] text-xs mb-4 block">Proven Outcomes</span>
+                <h2 class="font-headline text-4xl md:text-5xl font-bold mb-6 tracking-tight">Clinical <span class="italic text-brand font-normal">Transformations</span></h2>
+                <p class="text-stone-500 max-w-2xl mx-auto text-lg font-light">Explore our archive of surgical and aesthetic case studies. Real results achieved through medical-grade precision.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <template x-for="(res, index) in results" :key="index">
+                    <div class="group cursor-pointer" @click="currentResultIndex = index; showResultsModal = true; sliderPos = 50">
+                        <div class="relative aspect-[4/5] overflow-hidden rounded-2xl mb-8 shadow-editorial bg-stone-100">
+                            <!-- Overlay indicator -->
+                            <div class="absolute inset-0 bg-brand/10 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center">
+                                <div class="bg-white text-brand px-6 py-3 text-[10px] font-black uppercase tracking-widest shadow-xl">View case study</div>
+                            </div>
+                            <!-- Side by side preview -->
+                            <div class="absolute inset-0 flex">
+                                <div class="w-1/2 h-full border-r border-white/20 overflow-hidden">
+                                    <img :src="res.before" class="w-full h-full object-cover grayscale-[0.2] brightness-90 group-hover:scale-110 transition-transform duration-700 select-none">
+                                </div>
+                                <div class="w-1/2 h-full overflow-hidden">
+                                    <img :src="res.after" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 select-none">
+                                </div>
+                            </div>
+                            <!-- Badge -->
+                            <div class="absolute top-4 left-4 z-20 bg-stone-900/80 backdrop-blur-md text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1" x-text="res.id">#402</div>
+                        </div>
+                        <h3 class="font-headline text-xl font-bold text-stone-850 mb-3 group-hover:text-brand transition-colors" x-text="res.title">Elite Veneer Restoration</h3>
+                        <p class="text-stone-500 text-sm font-light leading-relaxed mb-6 line-clamp-2" x-text="res.desc">An architectural approach to cosmetic dentistry utilizing porcelain veneers.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <template x-for="feature in res.features">
+                                <span class="text-[9px] font-bold uppercase tracking-widest text-brand-light bg-brand/5 px-2 py-1" x-text="feature">Feature</span>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            
+            <div class="flex justify-center mt-20">
+                <div class="group flex items-center gap-4 text-stone-400 hover:text-brand transition-all cursor-pointer" @click="currentResultIndex = 0; showResultsModal = true; sliderPos = 50">
+                    <span class="text-xs font-bold uppercase tracking-widest">View clinical archive</span>
+                    <span class="w-12 h-px bg-stone-200 group-hover:bg-brand transition-all"></span>
+                    <span class="material-symbols-outlined text-sm">clinical_notes</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- FAQ Accordion (Interactive with Alpine.js) -->
-    <section class="py-32 px-6" id="faq">
+    <section class="py-16 md:py-32 px-6" id="faq">
         <div class="max-w-3xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="font-headline text-4xl md:text-5xl font-bold mb-6 text-stone-850">Frequently Asked Questions
@@ -1092,7 +1195,7 @@
 
 
     <!-- Footer CTA -->
-    <section class="py-24 md:py-32 px-6 bg-brand relative overflow-hidden">
+    <section class="py-12 md:py-24 md:py-32 px-6 bg-brand relative overflow-hidden">
         <!-- Abstract gradient overlay -->
         <div class="absolute inset-0 bg-gradient-to-tr from-stone-900/40 to-transparent"></div>
 
@@ -1158,11 +1261,11 @@
         x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
         x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
-        class="fixed inset-0 z-[100] flex items-center justify-center bg-stone-900/95 backdrop-blur-xl p-4 md:p-10"
+        class="fixed inset-0 z-[100] flex items-start md:items-center justify-center bg-stone-900/95 backdrop-blur-xl p-4 md:p-10 overflow-y-auto"
         x-cloak>
 
         <div @click.away="showResultsModal = false"
-            class="relative max-w-5xl w-full bg-white rounded-none shadow-2xl flex flex-col md:flex-row overflow-hidden animate-fade-in-up">
+            class="relative max-w-5xl w-full bg-white rounded-none shadow-2xl flex flex-col md:flex-row overflow-hidden animate-fade-in-up my-auto">
 
             <!-- Close Button -->
             <button @click="showResultsModal = false"
@@ -1171,30 +1274,53 @@
             </button>
 
             <!-- Image Comparison Slider -->
-            <div class="w-full md:w-2/3 relative aspect-square md:aspect-auto bg-stone-100 overflow-hidden cursor-ew-resize group"
+            <div class="w-full md:w-2/3 relative aspect-[4/3] md:aspect-auto bg-stone-100 overflow-hidden cursor-ew-resize group"
                 @mousedown="isDragging = true" @mouseup="isDragging = false"
                 @mousemove="if(isDragging) sliderPos = ($event.offsetX / $event.target.clientWidth) * 100"
                 x-data="{ isDragging: false }">
 
                 <!-- After Image (Base) -->
-                <img src="Images/results-after.png"
+                <img :src="results[currentResultIndex].after"
                     class="absolute inset-0 w-full h-full object-cover select-none"
                     alt="Perfect dental results after treatment">
 
                 <!-- Before Image (Overlay) -->
                 <div class="absolute inset-0 overflow-hidden select-none border-r-2 border-white shadow-2xl"
                     :style="{ width: sliderPos + '%' }">
-                    <img src="Images/results-before.png"
+                    <img :src="results[currentResultIndex].before"
                         class="absolute inset-0 h-full object-cover max-w-none grayscale-[0.1] brightness-95"
                         :style="{ width: (10000 / sliderPos) + '%' }" alt="Dental state before clinical intervention">
                 </div>
 
+                <!-- Navigation Controls -->
+                <div class="absolute inset-y-0 left-4 flex items-center z-40 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <button @click="currentResultIndex = (currentResultIndex === 0) ? results.length - 1 : currentResultIndex - 1"
+                        class="w-10 h-10 bg-white/20 backdrop-blur-md text-white rounded-full flex items-center justify-center hover:bg-brand transition-all">
+                        <span class="material-symbols-outlined">chevron_left</span>
+                    </button>
+                </div>
+                <div class="absolute inset-y-0 right-4 flex items-center z-40 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <button @click="currentResultIndex = (currentResultIndex === results.length - 1) ? 0 : currentResultIndex + 1"
+                        class="w-10 h-10 bg-white/20 backdrop-blur-md text-white rounded-full flex items-center justify-center hover:bg-brand transition-all">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                </div>
+
+                <!-- Case Indicators -->
+                <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-40">
+                    <template x-for="(res, index) in results" :key="index">
+                        <button @click="currentResultIndex = index" 
+                                class="w-2 h-2 rounded-full transition-all duration-300"
+                                :class="currentResultIndex === index ? 'bg-brand w-6' : 'bg-white/50'"></button>
+                    </template>
+                </div>
+
                 <!-- Labels -->
                 <div
-                    class="absolute bottom-6 left-6 bg-stone-900/60 backdrop-blur-md text-white text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 font-medium select-none">
+                    class="absolute top-6 left-6 bg-stone-900/60 backdrop-blur-md text-white text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 font-medium select-none z-40">
                     Before</div>
                 <div
-                    class="absolute bottom-6 right-6 bg-brand/80 backdrop-blur-md text-white text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 font-medium select-none">
+                    class="absolute top-6 right-6 bg-brand/80 backdrop-blur-md text-white text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 font-medium select-none z-40">
                     After</div>
 
                 <!-- Slider Control -->
@@ -1206,9 +1332,8 @@
                     :style="{ left: sliderPos + '%' }">
                     <div
                         class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <div class="flex gap-1">
-                            <span class="w-1.5 h-1.5 bg-brand rounded-full animate-pulse"></span>
-                            <span class="w-1.5 h-1.5 bg-brand rounded-full animate-pulse delay-75"></span>
+                        <div class="flex gap-1 text-brand">
+                            <span class="material-symbols-outlined text-sm font-bold">unfold_more</span>
                         </div>
                     </div>
                 </div>
@@ -1216,23 +1341,21 @@
 
             <!-- Content Panel -->
             <div class="w-full md:w-1/3 p-10 md:p-12 flex flex-col justify-center bg-surface-muted">
-                <span class="text-brand font-semibold uppercase tracking-[0.2em] text-[10px] mb-4 block">Case Study
+                <span class="text-brand font-semibold uppercase tracking-[0.2em] text-[10px] mb-4 block" x-text="'Case Study ' + results[currentResultIndex].id">Case Study
                     #402</span>
-                <h2 class="font-headline text-3xl font-bold text-stone-850 mb-6 leading-tight">Elite Veneer
+                <h2 class="font-headline text-3xl font-bold text-stone-850 mb-6 leading-tight" x-text="results[currentResultIndex].title">Elite Veneer
                     <br />Restoration</h2>
-                <p class="text-stone-500 text-sm font-light leading-relaxed mb-8">
+                <p class="text-stone-500 text-sm font-light leading-relaxed mb-8" x-text="results[currentResultIndex].desc">
                     An architectural approach to cosmetic dentistry. This case utilized minimally invasive porcelain
                     veneers to correct alignment and restore natural luminosity.
                 </p>
                 <div class="space-y-4 mb-10">
-                    <div class="flex items-center gap-3">
-                        <span class="w-1.5 h-1.5 bg-brand rounded-full"></span>
-                        <span class="text-xs text-stone-600 font-medium">Bespoke Shade Matching</span>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <span class="w-1.5 h-1.5 bg-brand rounded-full"></span>
-                        <span class="text-xs text-stone-600 font-medium">Gingival Contouring</span>
-                    </div>
+                    <template x-for="feature in results[currentResultIndex].features">
+                        <div class="flex items-center gap-3">
+                            <span class="w-1.5 h-1.5 bg-brand rounded-full"></span>
+                            <span class="text-xs text-stone-600 font-medium" x-text="feature">Feature</span>
+                        </div>
+                    </template>
                 </div>
                 <button @click="showResultsModal = false; setTimeout(() => document.getElementById('contact').scrollIntoView({behavior: 'smooth'}), 10)"
                     class="shimmer w-full bg-brand text-white py-5 font-bold text-xs uppercase tracking-widest hover:bg-brand-dark transition-all duration-300 transform hover:-translate-y-1">
@@ -1242,16 +1365,81 @@
         </div>
     </div>
     <!-- Sticky Mobile CTA -->
-    <div class="fixed bottom-0 left-0 w-full lg:hidden z-50 bg-white/95 backdrop-blur-md border-t border-stone-200 p-4 flex gap-4 animate-fade-in"
+    <div class="fixed bottom-0 left-0 w-full md:hidden z-50 bg-white/95 backdrop-blur-md border-t border-stone-200 flex flex-col animate-fade-in"
         x-show="!showResultsModal" x-transition>
-        <a href="tel:7145550123"
-            class="flex-1 bg-stone-100 text-stone-850 text-center py-4 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2">
-            <span class="material-symbols-outlined text-base">call</span> Call Now
-        </a>
-        <button @click="showContactModal = true"
-            class="shimmer flex-1 bg-brand text-white text-center py-4 text-xs font-bold uppercase tracking-widest">
-            Book Visit
-        </button>
+        <div class="p-4 flex gap-4">
+            <a href="tel:7145550123"
+                class="flex-1 bg-stone-100 text-stone-850 text-center py-4 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-base">call</span> Call Now
+            </a>
+            <button @click="showContactModal = true"
+                class="shimmer flex-1 bg-brand text-white text-center py-4 text-xs font-bold uppercase tracking-widest">
+                Book Visit
+            </button>
+        </div>
+        <!-- Rolling Text -->
+        <div class="bg-brand py-2 overflow-hidden marquee-container">
+            <div class="animate-marquee flex gap-12 items-center">
+                <span class="text-[10px] font-black text-white uppercase tracking-[0.2em] whitespace-nowrap">Claim your 20% Clinical Discount on Dental Implants</span>
+                <span class="text-[10px] font-black text-white uppercase tracking-[0.2em] whitespace-nowrap">Claim your 20% Clinical Discount on Dental Implants</span>
+                <span class="text-[10px] font-black text-white uppercase tracking-[0.2em] whitespace-nowrap">Claim your 20% Clinical Discount on Dental Implants</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky Desktop/Tablet Offer Bar -->
+    <div class="fixed bottom-0 left-0 w-full hidden md:flex z-50 bg-stone-900/95 backdrop-blur-xl border-t border-white/5 py-5 px-10 shadow-2xl items-center"
+         x-show="!showResultsModal && !showContactModal" 
+         x-transition:enter="transition ease-out duration-500" 
+         x-transition:enter-start="translate-y-full" 
+         x-transition:enter-end="translate-y-0"
+         x-data="{ 
+            timeLeft: { h: 02, m: 44, s: 39 },
+            startTimer() {
+                setInterval(() => {
+                    if (this.timeLeft.s > 0) this.timeLeft.s--;
+                    else if (this.timeLeft.m > 0) { this.timeLeft.m--; this.timeLeft.s = 59; }
+                    else if (this.timeLeft.h > 0) { this.timeLeft.h--; this.timeLeft.m = 59; this.timeLeft.s = 59; }
+                }, 1000)
+            }
+         }" x-init="startTimer()">
+        <div class="max-w-7xl mx-auto w-full flex items-center justify-between gap-16">
+            <!-- Left Group: Status & Timer -->
+            <div class="flex items-center gap-12">
+                <div class="flex items-center gap-4">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-brand"></span>
+                    </span>
+                    <span class="text-white text-[10px] font-black uppercase tracking-[0.25em] whitespace-nowrap">Limited Offer Active</span>
+                </div>
+                
+                <div class="h-8 w-px bg-white/10"></div>
+                
+                <div class="flex items-center gap-4">
+                    <span class="text-white/40 text-[10px] font-bold uppercase tracking-widest whitespace-nowrap">Offer Ends In:</span>
+                    <div class="flex items-center gap-1 font-headline text-2xl font-bold text-white min-w-[140px]">
+                        <span x-text="String(timeLeft.h).padStart(2,'0')">02</span>
+                        <span class="text-brand">:</span>
+                        <span x-text="String(timeLeft.m).padStart(2,'0')">44</span>
+                        <span class="text-brand">:</span>
+                        <span x-text="String(timeLeft.s).padStart(2,'0')">39</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Middle Group: Context (Hidden on smaller tablets) -->
+            <div class="hidden xl:flex flex-1 items-center justify-center px-8">
+                <p class="text-white/60 text-sm font-light italic text-center leading-tight">
+                    Claim your <span class="text-white font-medium not-italic underline decoration-brand/50 underline-offset-4">20% Clinical Discount</span> on surgery-grade Dental Implants.
+                </p>
+            </div>
+
+            <!-- Right Group: CTA -->
+            <button @click="showContactModal = true" class="shimmer bg-brand text-white px-12 h-14 inline-flex items-center justify-center font-bold text-[11px] uppercase tracking-[0.25em] transition-all duration-300 hover:bg-brand-dark transform hover:-translate-y-1 whitespace-nowrap shadow-xl shadow-brand/20">
+                Book Consult Now
+            </button>
+        </div>
     </div>
 
     <!-- Contact Popup Form Modal -->
@@ -1259,11 +1447,11 @@
         x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
         x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
-        class="fixed inset-0 z-[110] flex items-center justify-center bg-stone-900/90 backdrop-blur-md p-4"
+        class="fixed inset-0 z-[110] flex items-start md:items-center justify-center bg-stone-900/90 backdrop-blur-md p-4 overflow-y-auto"
         x-cloak>
         
         <div @click.away="showContactModal = false"
-            class="relative max-w-xl w-full bg-white p-10 md:p-12 shadow-2xl animate-fade-in-up">
+            class="relative max-w-xl w-full bg-white p-10 md:p-12 shadow-2xl animate-fade-in-up my-auto">
             
             <button @click="showContactModal = false"
                 class="absolute top-6 right-6 text-stone-400 hover:text-brand transition-all duration-300 hover:rotate-90">
