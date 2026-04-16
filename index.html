@@ -839,11 +839,9 @@
             </div>
             
             <div class="flex justify-center mt-20">
-                <div class="group flex items-center gap-4 text-stone-400 hover:text-brand transition-all cursor-pointer" @click="currentResultIndex = 0; showResultsModal = true; sliderPos = 50">
-                    <span class="text-xs font-bold uppercase tracking-widest">Book Appointment</span>
-                    <span class="w-12 h-px bg-stone-200 group-hover:bg-brand transition-all"></span>
-                    <span class="material-symbols-outlined text-sm">clinical_notes</span>
-                </div>
+                <button @click="showContactModal = true" class="shimmer bg-brand text-white px-12 h-[64px] inline-flex items-center justify-center rounded-none font-bold text-xs uppercase tracking-[0.25em] shadow-2xl hover:bg-brand-dark transition-all duration-300 transform hover:-translate-y-1">
+                    Book Now
+                </button>
             </div>
         </div>
     </section>
